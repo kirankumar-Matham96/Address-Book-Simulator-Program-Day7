@@ -1,6 +1,8 @@
-import java.util.ArrayList;
 
-//DETAILS OF MEMBERS(individual)
+//import java.util.ArrayList;
+import java.util.Scanner;
+
+//members details (individual)
 class Contact
 {
 	//private global variables
@@ -23,54 +25,6 @@ class Contact
 		this.state = state;
 		this.zip = zip;
 		this.phoneNumber = phoneNumber;
-		this.email = email;
-	}
-
-	//update firstName
-	public void updateFirstName(String firstName)
-	{
-		this.firstName = firstName;
-	}
-
-	//update lastName
-	public void updateLastName(String lastName)
-	{
-		this.lastName = lastName;
-	}
-
-	//update address
-	public void updateAddress(String address)
-	{
-		this.address = address;
-	}
-
-	//update city
-	public void updateCity(String city)
-	{
-		this.city = city;
-	}
-
-	//update state
-	public void updateState(String state)
-	{
-		this.state = state;
-	}
-
-	//update zip
-	public void updateZip(int zip)
-	{
-		this.zip = zip;
-	}
-
-	//update phoneNumber
-	public void updatePhoneNumber(long phoneNumber)
-	{
-		this.phoneNumber = phoneNumber;
-	}
-
-	//update email
-	public void updateEmail(String email)
-	{
 		this.email = email;
 	}
 
@@ -178,58 +132,57 @@ class Contact
 	}
 }
 
-//LIST OF MEMBERS
+//List of members
 class AddressBookMembers
 {
-	//creating a list for members
-	private ArrayList<Contact> members;
-	/**
-	 * members = list of member's details
-	 */
+	Contact contact;
 
-	//assigning members to the list
-	public AddressBookMembers(ArrayList<Contact> members)
+	//assigning a contact to Contact class
+	public void setContact(String f_name, String l_name, String address, 
+							String city, String state, int zip, long phoneNumber, 
+							String email)
 	{
-		this.members = members;
+		contact = new Contact(f_name, l_name, address, city, state, zip, phoneNumber, email);
 	}
 
-	//Returns the list of members
-	public ArrayList<Contact> getContact()
+	//Return the contact
+	public void getContact()
 	{
-		return members;
-	}
-
-	//Adds a new member to the members list
-	public void setMember(ArrayList<Contact> member)
-	{
-		this.members = member;
+		System.out.println(contact);
 	}
 }
 
 //MAIN CLASS
 public class AddressBookSimulatorProgram
 {
-	static int i;
-	static ArrayList<Contact> addressBook;
-	static AddressBookMembers abms;
-	static Contact kiran;
-
 	//main method
 	public static void main(String[] args)
 	{
-		//Entering the details manually
-		kiran = new Contact("Kiran", "Matham", "H.No: 1-4-5/2, Near post office, Ramapure.(Not my true address!)", "Hyderabad", "Telangana", 589267, 9865895652L, "email1@yahoo.com");
+		//Taking the details from user
+		Scanner sc = new Scanner(System.in);//<== warning:(Resource never closed!)
 
-		//Creating a list for the contacts
-		addressBook = new ArrayList<>();
+		System.out.println("Enter member's first name: ");
+		String firstName = sc.nextLine();
+		System.out.println("Enter member's last name: ");
+		String lastName = sc.nextLine();
+		System.out.println("Enter email: ");
+		String email = sc.nextLine();
+		System.out.println("Enter member's address: ");
+		String address = sc.nextLine();
+		System.out.println("Enter city: ");
+		String city = sc.nextLine();
+		System.out.println("Enter state: ");
+		String state = sc.nextLine();
+		System.out.println("Enter zip: ");
+		int zip = sc.nextInt();
+		System.out.println("Enter phone number: ");
+		long phoneNumber = sc.nextLong();
 
-		//Adding member to the contact list
-		addressBook.add(kiran);
-
-		//Passing the contacts list to the address book
-		abms = new AddressBookMembers(addressBook);
+		//Passing variables/details to the Contact-class
+		AddressBookMembers person1 = new AddressBookMembers();
+		person1.setContact(firstName, lastName, address, city, state, zip, phoneNumber, email);
 
 		//printing the contact details from Contacts list
-		System.out.println("Contact: "+abms.getContact());
+		person1.getContact();
 	}
 }
