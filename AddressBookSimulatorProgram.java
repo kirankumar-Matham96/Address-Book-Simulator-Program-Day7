@@ -3,9 +3,9 @@ import java.util.*;
 //members datails (individual)
 class Contact
 {
- 	//private global variables
-	 private String firstName;
-	 private String lastName;
+    //private global variables
+    private String firstName;
+    private String lastName;
     private String address;
     private String city;
     private String state;
@@ -121,6 +121,7 @@ class AddressBookMembers
     /**
      * members = list of members
      */
+    HashMap<Contact, List<Contact>> map = new HashMap<>();
 
     //assigning members to the list
     public AddressBookMembers(List<Contact> members)
@@ -138,6 +139,13 @@ class AddressBookMembers
     public void setMember(List<Contact> member)
     {
         this.members = member;
+        map.put(member.get(0), member);
+    }
+
+    //Returns the contact by name
+    public List<Contact> getByName(String name)
+    {
+    	return map.get(name);
     }
 }
 
@@ -214,7 +222,7 @@ public class AddressBookSimulatorProgram
         //Adding member to the contact list
         membersList.add(kiran);
 
-		  //Passing the contacts list to the address book
+        //Passing the contacts list to the address book
         abms = new AddressBookMembers(membersList);
 
         //printing the contact details from Contacts list
@@ -248,7 +256,7 @@ public class AddressBookSimulatorProgram
         membersList.add(varun);
 
         //printing the contact details from Contacts list
-        System.out.println("Contact: "+abms.getContact());
+//        System.out.println("Contact: "+abms.getContact());
 
         System.out.println("Do you want to update details? : Y/N");
         sc = new Scanner(System.in);
@@ -274,11 +282,13 @@ public class AddressBookSimulatorProgram
                     default:
                         System.out.println("Sorry! this program is for two persons only!");
                 }
-						break;
             default:
                 System.out.println("Thank you!");
         }
-   		System.out.println("Contact: "+abms.getContact());
+
+//        System.out.println("Contact: "+abms.getContact());
+        System.out.println(abms.getByName("kiran"));
+
         System.out.println("Do yopu want to delete the last list entered?: Y/N");
         sc = new Scanner(System.in);
         String delete = sc.nextLine().toUpperCase();
@@ -301,8 +311,9 @@ public class AddressBookSimulatorProgram
         		default:
         			System.out.println("Sorry! this program is for two persons only!");
         	}
+        	System.out.println("contact deleted from the Address Book!");
         }
-        System.out.println("Contact: "+abms.getContact());
-        System.out.println("contact deleted from the Address Book!");
-   }
+//        System.out.println("Contact: "+abms.getContact());
+
+    }
 }
